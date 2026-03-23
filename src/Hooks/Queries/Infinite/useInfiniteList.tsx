@@ -22,7 +22,7 @@ export function useInfiniteList() {
     queryKey: ["leaderboard"],
     initialPageParam: null,
     queryFn: async ({ pageParam }) => {
-      const r = await fetch(GET_PAGINATED_LEADERBOARD(pageParam, 20));
+      const r = await fetch(GET_PAGINATED_LEADERBOARD(pageParam, 20), { credentials: "include" });
       if (!r.ok) throw new Error("failed");
       return (await r.json()) as Page;
     },

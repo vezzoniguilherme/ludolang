@@ -10,7 +10,7 @@ export function useCourse(id: number | "all") {
     queryKey: qk.courses(id),
     queryFn: async () => {
       if (id === "all") {
-        const response = await fetch(GET_ALL_COURSES);
+        const response = await fetch(GET_ALL_COURSES, { credentials: "include" });
         if (!response.ok) {
           throw new Error("Failed to fetch courses");
         }
@@ -30,7 +30,7 @@ export function useCourse(id: number | "all") {
         if (course) return course;
       }
 
-      const response = await fetch(GET_ALL_COURSES);
+      const response = await fetch(GET_ALL_COURSES, { credentials: "include" });
       if (!response.ok) {
         throw new Error("Failed to fetch courses");
       }

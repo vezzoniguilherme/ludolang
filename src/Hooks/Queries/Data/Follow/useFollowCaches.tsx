@@ -26,7 +26,7 @@ export function useFollowCaches(userId: number) {
 export const fetchFollowResponse = async (
   userId: number
 ): Promise<FollowResponse> => {
-  const r = await fetch(GET_FOLLOW_COUNTS_BY_USER_ID(userId));
+  const r = await fetch(GET_FOLLOW_COUNTS_BY_USER_ID(userId), { credentials: "include" });
   if (!r.ok) throw new Error("failed");
   return r.json();
 };

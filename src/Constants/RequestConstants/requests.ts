@@ -1,7 +1,7 @@
 
 export async function getData<T>(
   path: string,
-  credentials: boolean = false,
+  credentials: boolean = true,
   name: string = ""
 ): Promise<T> {
 
@@ -16,7 +16,7 @@ export async function getData<T>(
 export async function submitData<TResponse, TBody = unknown>(
   path: string,
   body: TBody | null,
-  credentials = false
+  credentials = true
 ): Promise<TResponse> {
   const res = await fetch(path, {
     method: "POST",
