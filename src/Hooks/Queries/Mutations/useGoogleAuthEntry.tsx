@@ -19,6 +19,12 @@ export function useGoogleAuthEntry() {
         credentials: "include",
       });
 
+      if (!res.ok) {
+         const errData = await res.json();
+         alert("BACKEND ERROR: " + JSON.stringify(errData));
+         throw new Error("Failed to login: " + JSON.stringify(errData));
+      }
+
       const user: UserType = await res.json();
       queryClient.setQueryData(qk.user(user.id), user);
       queryClient.setQueryData(qk.currentUser(), user);
