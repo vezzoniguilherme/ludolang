@@ -70,7 +70,7 @@ export const qo = {
 
   unit: (unitId: number) =>
     queryOptions<UnitType>({
-      queryKey: qk.lesson(unitId),
+      queryKey: qk.unit(unitId),
       queryFn: () => unitBatcher.fetch(unitId),
       staleTime: 60_000,
     }),
