@@ -111,6 +111,7 @@ export default function LessonPopover({
           <AnimatePresence mode="wait">
             {open && (
               <motion.div
+                ref={contentRef}
                 key="lp"
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -124,7 +125,6 @@ export default function LessonPopover({
                 onClick={(e) => e.stopPropagation()}
               >
                 <div
-                  ref={contentRef}
                   className={`flex w-full flex-col pb-4 ${
                     unitColor == "LOCKED"
                       ? style.lightVersionText
