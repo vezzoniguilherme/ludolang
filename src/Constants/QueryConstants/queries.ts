@@ -36,10 +36,13 @@ export const qo = {
       staleTime: 60_000,
     }),
 
-  sectionTree: (sectionId: number) =>
+  sectionTree: (sectionId: number | null | undefined) =>
     queryOptions<FlatSectionTree>({
-      queryKey: qk.sectionTree(sectionId),
-      queryFn: () => getData(GET_SECTION_TREE(sectionId)),
+      queryKey: qk.sectionTree(sectionId!),
+      queryFn: () => {
+        if (!sectionId) return { units: [] } as any as FlatSectionTree;
+        return getData(GET_SECTION_TREE(sectionId));
+      },
       staleTime: 60_000,
     }),
 

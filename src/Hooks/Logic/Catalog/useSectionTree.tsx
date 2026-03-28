@@ -13,13 +13,14 @@ type Args = {
 
 export function useSectionTree({ tree }: Args) {
   const unitQueries = useSuspenseQueries({
-    queries: tree.units.map((unit: FlatUnit) => qo.unit(unit.id)),
+    queries: tree?.units?.map((unit: FlatUnit) => qo.unit(unit.id)) ?? [],
   });
 
   const lessonQueries = useSuspenseQueries({
-    queries: tree.units.flatMap((unit: FlatUnit) =>
-      unit.lessons.map((lesson: FlatLesson) => qo.lesson(lesson.id))
-    ),
+    queries:
+      tree?.units?.flatMap((unit: FlatUnit) =>
+        unit.lessons?.map((lesson: FlatLesson) => qo.lesson(lesson.id)) ?? []
+      ) ?? [],
   });
 
   const units = unitQueries.map((unitQuery) => unitQuery.data);

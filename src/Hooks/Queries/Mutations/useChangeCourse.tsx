@@ -43,5 +43,9 @@ export function useChangeCourse() {
       qc.setQueryData(qk.currentUser(), updatedUser);
       qc.setQueryData(qk.userCourses(updatedUser.id), newCourseList);
     },
+    onError: (error) => {
+      alert(`Failed to change course. Error: ${error.message}\nMake sure the database is seeded with course data.`);
+      console.error("Change course error:", error);
+    },
   });
 }

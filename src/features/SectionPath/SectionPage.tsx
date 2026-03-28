@@ -36,8 +36,21 @@ export function SectionPage() {
 
   // -- THIS MAKES IT SO THE PAGE STARTS AT THE LAST KNOWN POSITION -- //
   useEffect(() => {
-    scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
+    if (units && units.length > 0) {
+      scrollToUnit(currentUnit, units, scrollContainerRef, unitRefs);
+    }
   }, []);
+
+  if (!units || units.length === 0) {
+    return (
+      <div className="flex flex-col items-center justify-center w-full h-[80dvh] text-center px-4 pt-10">
+        <h2 className="text-2xl font-bold text-white mb-4">Coming Soon!</h2>
+        <p className="text-white/60">
+          This course is still under construction. Please check back later or choose another language from the Courses tab.
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>
