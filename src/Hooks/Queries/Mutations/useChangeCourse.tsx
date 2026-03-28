@@ -29,7 +29,15 @@ export function useChangeCourse() {
         credentials: "include",
       });
 
-      if (!res.ok) throw new Error("Failed to change course");
+      if (!res.ok) {
+        let errorDetails = "";
+        try {
+          errorDetails = await res.text();
+        } catch (e) {
+          errorDetails = "Could not read response body";
+        }
+        throw new Error(`HTTP ${res.status}: ${errorDetails}`);
+      }
 
       const data = (await res.json()) as CourseChangeType;
       return data;
