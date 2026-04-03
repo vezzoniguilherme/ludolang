@@ -139,7 +139,6 @@ export default function LessonPopover({
 
                 <WideActionButton
                   onSubmit={() => {
-                    alert("Botão clicado! Navegando para a lição: " + lesson.id + ". unitColor: " + unitColor);
                     if (unitColor != "LOCKED") {
                       navigate(`/lessons/${lesson.id}/0`);
                     }
