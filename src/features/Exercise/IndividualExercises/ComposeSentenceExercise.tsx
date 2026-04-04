@@ -26,9 +26,9 @@ export function ComposeSentenceExercise({
     return (
       <AnimatePresence>
         <motion.div {...fadeInStagger(0.4)} className="w-full h-full flex flex-col gap-2">
-          <div className="w-full flex justify-start gap-4">
-            <div className="my-10 p-4 border h-fit border-duoGrayBorder rounded-xl">
-              <p className="text-white font-light text-xl">{exercise.prompt}</p>
+          <div className="w-full flex justify-center mt-6">
+            <div className="p-4 border border-duoGrayBorder rounded-xl max-w-lg w-full">
+              <p className="text-white font-light text-xl text-center">{exercise.prompt}</p>
             </div>
           </div>
 
