@@ -51,17 +51,12 @@ export function LessonPage() {
             removeOption={removeOption}
           />
         </div>
-        <div className="w-full flex lg:justify-end lg:px-40">
+        <div className="fixed bottom-0 left-0 right-0 w-full flex lg:justify-end lg:px-40 p-4 pb-6 z-[60]">
           <WideActionButton
             height={"h-14 lg:w-40"}
             text="Check"
+            activeText={lessonResponse ? "Continue" : "Check"}
             onSubmit={() => submitAnswer()}
-            activeTextColor={`${
-              lessonResponse?.correct == true ? "text-black" : "text-white"
-            }`}
-            activeColor={`active:shadow-none active:translate-y-[5px] shadow-mainShadow ${
-              lessonResponse?.correct == true ? "bg-mainAccent" : "bg-main"
-            } `}
             isActive={!intendsToExit && currentSelectedOptions.length > 0}
             isIncorrect={!intendsToExit && lessonResponse?.correct == false}
           />
@@ -70,7 +65,7 @@ export function LessonPage() {
 
       <BottomSheet
         isActive={!!lessonResponse && !intendsToExit}
-        key={`result-${Number(position)}-${lessonResponse?.correct}`}
+        sheetKey={`result-${Number(position)}-${lessonResponse?.correct}`}
       >
         {!!lessonResponse && (
           <LessonResult
@@ -84,7 +79,7 @@ export function LessonPage() {
         isActive={intendsToExit}
         onClose={() => setIntendsToExit(false)}
         isFullScreen={true}
-        key={1}
+        sheetKey={1}
         bgColor="bg-main"
       >
         <ExitConfirmationSheet

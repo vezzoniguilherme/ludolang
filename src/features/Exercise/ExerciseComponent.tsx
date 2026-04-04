@@ -5,6 +5,7 @@ import type {
 } from "../../Types/Catalog/ExerciseType.ts";
 import { ClozeExercise } from "./IndividualExercises/ClozeExercise";
 import { ComposeSentenceExercise } from "./IndividualExercises/ComposeSentenceExercise";
+import { TranslationExercise } from "./IndividualExercises/TranslationExercise";
 
 type ExerciseComponentProps = {
   exercise: Exercise;
@@ -19,15 +20,24 @@ export function ExerciseComponent({
   addOption,
   removeOption,
 }: ExerciseComponentProps) {
-  console.log(JSON.stringify("EXERCISE IS: " + JSON.stringify(exercise)));
+
 
   const title =
     exercise.type == "CLOZE" ? "Fill in the blank" : "Translate this sentence";
 
   const toRender = () => {
-    if (exercise.type == "CLOZE") {
+    if (exercise.type === "CLOZE") {
       return (
         <ClozeExercise
+          exercise={exercise}
+          addOption={addOption}
+          removeOption={removeOption}
+          currentSelectedOptions={currentSelectedOptions}
+        />
+      );
+    } else if (exercise.type === "TRANSLATION") {
+      return (
+        <TranslationExercise
           exercise={exercise}
           addOption={addOption}
           removeOption={removeOption}
