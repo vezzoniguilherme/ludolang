@@ -1,6 +1,6 @@
 import "./App.css";
 import { SectionPage } from "./features/SectionPath/SectionPage";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import { LessonPage } from "./features/Lesson/LessonSession/LessonPage.tsx";
 import { LessonCompletePage } from "./features/Lesson/LessonComplete/LessonCompletePage.tsx";
 import { QuestsPage } from "./features/Quests/QuestsPage";
@@ -27,7 +27,8 @@ function App() {
             <Route element={<AuthGuard />}>
               <Route element={<MainLayout />}>
                 <Route element={<LearnHeaderLayout />}>
-                  <Route path="" element={<SectionPage />} />
+                  <Route path="" element={<Navigate to="/learn" replace />} />
+                  <Route path="/learn" element={<SectionPage />} />
                   <Route
                     path="/profile/:userId/friends"
                     element={<FriendsPage />}

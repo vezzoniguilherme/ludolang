@@ -6,12 +6,16 @@ import type { CourseType } from "../../Types/Catalog/CourseType.ts";
 import { ContentWidget } from "../Atoms/Widget/ContentWidget.tsx";
 import { qo } from "../../Constants/QueryConstants/queries.ts";
 
+import { useLocation } from "react-router-dom";
+
 export function MainRightSideBar() {
   const { data: currentUser } = useSuspenseQuery(qo.currentUser())
   const courseId = currentUser.currentCourseId;
 
   const { data: userCourseProgress } = useSuspenseQuery(qo.courseProgress(courseId))
   const { data: course } = useCourse(currentUser.currentCourseId);
+  const location = useLocation();
+  const isQuestsPage = location.pathname.includes("/quests");
 
   return (
     <aside className="hidden border-l border-mainAlt lg:flex flex-col bg-mainDark w-90 xl:w-110 2xl:w-180">
@@ -25,9 +29,11 @@ export function MainRightSideBar() {
             />
           )}
         </div>
-        <ContentWidget padding="pl-4 pr-6" title={"Daily Quests"}>
-          <QuestListWidget />
-        </ContentWidget>
+        {!isQuestsPage && (
+          <ContentWidget padding="pl-4 pr-6" title={"Daily Quests"}>
+            <QuestListWidget />
+          </ContentWidget>
+        )}
       </div>
     </aside>
   );

@@ -10,7 +10,7 @@ export function MainNavigationButtons({
 }: MainNavigationButtonsProps) {
   return (
     <>
-      <FooterButton iconName="HomeIcon" path="/">
+      <FooterButton iconName="HomeIcon" path="/learn">
         <p className="hidden lg:flex text-white text-xl">Learn</p>
       </FooterButton>
       <FooterButton iconName="TrophyIcon" path="/leaderboard">
