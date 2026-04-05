@@ -20,9 +20,17 @@ export function useGoogleAuthEntry() {
       });
 
       if (!res.ok) {
-         const errData = await res.json();
-         alert("BACKEND ERROR: " + JSON.stringify(errData));
-         throw new Error("Failed to login: " + JSON.stringify(errData));
+         try {
+           const errData = await res.json();
+           alert("BACKEND ERROR: " + JSON.stringify(errData));
+         } catch (e) {
+           if (res.status === 504 || res.status === 503 || res.status === 502) {
+              alert("A máquina gratuita do Servidor demora até 2 minutos para despertar e a Vercel estourou o tempo de espera (10 seg). Aguarde e tente entrar novamente em 1 ou 2 minutos!");
+           } else {
+              alert("Erro de conexão (Status " + res.status + "). O servidor pode estar indisponível.");
+           }
+         }
+         throw new Error("Failed to login, status: " + res.status);
       }
 
       const user: UserType = await res.json();

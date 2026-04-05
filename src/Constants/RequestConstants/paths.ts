@@ -1,7 +1,9 @@
 //export const API_URL = "http://localhost:";
 //export const API_PORT = "8080";
 
-export const API_URL = import.meta.env.VITE_API_URL!;
+// When deployed to Vercel (PROD), we want to use relative paths so Vercel's Reverse Proxy (vercel.json) catches it.
+// When running locally, we continue hitting localhost or the specific defined address.
+export const API_URL = import.meta.env.PROD ? "" : import.meta.env.VITE_API_URL!;
 
 export const API_PREFIX = "/api";
 
